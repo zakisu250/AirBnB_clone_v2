@@ -25,7 +25,7 @@ class DBStorage():
         host = getenv(HBNB_MYSQL_HOST)
         db = getenv(HBNB_MYSQL_DB)
         env = getenv(HBNB_ENV)
-        self.__engin = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(user, pwd, host, db), pool_pre_ping=True)
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(user, pwd, host, db), pool_pre_ping=True)
 
         if env == "test":
             Base.metadata.drop_all(self.__engine)
@@ -44,7 +44,7 @@ class DBStorage():
 
     def new(self, obj):
         """Add the object to DB"""
-        self.__session.add(ob)
+        self.__session.add(obj)
 
     def save(self):
         """commit all cham=nge of the DB"""
