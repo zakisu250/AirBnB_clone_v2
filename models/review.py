@@ -4,8 +4,8 @@ from models.base_model import BaseModel
 from models.base_model import Base
 from sqlalchemy import Column, integer, Float, String, ForeignKey, Table
 from sqlalchemy.orm import relationship
-import os
 import models
+import os
 
 
 class Review(BaseModel, Base):
