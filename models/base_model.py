@@ -17,9 +17,12 @@ else:
 class BaseModel:
     """A base class for all hbnb models"""
     if os.getenv("HBNB_TYPE_STORAGE") == 'db':
-        id = Column(String(60), nullable=False, primary_key=True)
-        created_at = Column(DateTime, nullable=False, defualt=datetime.utcnow())
-        updated_at = Column(DateTime, nullable=False, defualt=datetime.utcnow())
+        id = Column(String(60), primary_key=True, nullable=False)
+        created_at = Column(DateTime, nullable=False,
+                            default=datetime.utcnow())
+        updated_at = Column(DateTime, nullable=False,
+                            default=datetime.utcnow())
+
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
         if not kwargs:
@@ -60,7 +63,7 @@ class BaseModel:
         if '_sa_instance_state' in dictionary.keys():
             del dictionary['_sa_instance_state']
         return dictionary
-    
+
     def delete(self):
         """
         delete the current instance from the storage"""

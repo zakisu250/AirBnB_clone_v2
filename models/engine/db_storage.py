@@ -1,16 +1,19 @@
 #!/usr/bin/python3
 """
 New engine DBStorage"""
-from os import getenv
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from models.base_model import Base
+import os
+from models.base_model import BaseModel, Base
 from models.user import User
-from models.state import State 
+from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+from sqlalchemy import create_engine
+from sqlalchemy.orm import relationship
+from sqlalchemy.orm import scoped_session
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import MetaData
 
 
 class DBStorage():
@@ -20,14 +23,14 @@ class DBStorage():
 
     def __init__(self):
         """Initialization of Engine"""
-        user = getenv(HBNB_MYSQL_USER)
-        pwd = getenv(HBNB_MYSQL_PWD)
-        host = getenv(HBNB_MYSQL_HOST)
-        db = getenv(HBNB_MYSQL_DB)
-        env = getenv(HBNB_ENV)
-        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(user, pwd, host, db), pool_pre_ping=True)
+        self.__engine = create_engine("mysql+mysqldb://{}:{}@{}:3306/{}".
+                                      format(os.getenv('HBNB_MYSQL_USER'),
+                                             os.getenv('HBNB_MYSQL_PWD'),
+                                             os.getenv('HBNB_MYSQL_HOST'),
+                                             os.getenv('HBNB_MYSQL_DB')),
+                                      pool_pre_ping=True)
 
-        if env == "test":
+        if os.getenv("HBNB_ENV") == "test":
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
@@ -56,9 +59,14 @@ class DBStorage():
         if obj is not None:
             self.__session.delete(obj)
 
-
     def reload(self):
         """
         drop and recreate all tables in the database"""
-        Base.metadata.create_all(bing=self.__engine)
-        self.__session = scoped_session(sessionmaker(expire_on_commit=False)(bind=self.__engine))
+        self.__session = Base.metadata.create_all(bind=self.__engine)
+        new_session = scoped_session(sessionmaker(expire_on_commit=False,
+                                     bind=self.__engine))
+        self.__session = new_session
+
+    def close(self):
+        """ close opened sessions for private session """
+        self.__session.close()
