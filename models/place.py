@@ -5,7 +5,11 @@ from models.city import City
 from models.user import User
 from sqlalchemy import Column, String, Integer, Float, ForeignKey
 
-place_amenity = Table("place_amenity", Base.metadata, Column("place_id", String(60), ForeignKey("places.id"), primary_key=True, nullable=False), Column("amenity_id", String(60), ForeignKey("amenities.id"), primary_key=True, nullable=False))
+place_amenity = Table("place_amenity", Base.metadata,
+                      Column("place_id", String(60), ForeignKey("places.id"),
+                             primary_key=True, nullable=False),
+                      Column("amenity_id", String(60), ForeignKey("amenities.id"),
+                             primary_key=True, nullable=False))
 
 
 class Place(BaseModel, Base):
@@ -35,14 +39,14 @@ class Place(BaseModel, Base):
         def reviews(self):
             """ Returns list of reviews.id """
             var = models.storage.all()
-            lista = []
+            new_list = []
             result = []
             for key in var:
                 review = key.replace('.', ' ')
                 review = shlex.split(review)
                 if (review[0] == 'Review'):
-                    lista.append(var[key])
-            for elem in lista:
+                    new_list.append(var[key])
+            for elem in new_list:
                 if (elem.place_id == self.id):
                     result.append(elem)
             return (result)
