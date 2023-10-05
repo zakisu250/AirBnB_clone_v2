@@ -10,4 +10,3 @@ def do_pack():
     local("mkdir -p versions")
     local("tar -cvzf versions/web_static_{}.tgz web_static/".format(stime))
     return ("versions/web_static_{}.tgz".format(stime))
-
