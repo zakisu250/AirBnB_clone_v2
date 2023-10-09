@@ -1,9 +1,7 @@
 #!/usr/bin/python3
-""" Fabric script (based on the file 2-do_deploy_web_static.py) that creates
-and distributes an archive to your web servers, using the function deploy: """
+""" Fabric script that creates and distributes an archive to your web servers, using the function deploy: """
 
-
-from fabric.api import *
+from fabric.api import env, put, run, local
 from os.path import exists
 import time
 
@@ -16,9 +14,8 @@ def do_pack():
     local("tar -cvzf versions/web_static_{}.tgz web_static/".format(stime))
     return ("versions/web_static_{}.tgz".format(stime))
 
-
 def do_deploy(archive_path):
-    """ distributes an archive to my web servers """
+    """ distributes an archive to the web servers """
     if exists(archive_path) is False:
         return False
     filename = archive_path.split('/')[-1]
@@ -39,11 +36,9 @@ def do_deploy(archive_path):
     except:
         return False
 
-
 def deploy():
     """ Create and deploy the web_static archive """
     archived = do_pack()
-    if exists(archived) is False:
+    if not archived:
         return False
-    deployment = do_deploy(archived)
-    return deployment
+    return do_deploy(archived)
