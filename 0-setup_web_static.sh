@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # script that sets up web servers for the deployment of web_static
-sudo apt-get update
-sudo apt-get install nginx -y
-mkdir -p /data/web_static/releases/test
-mkdir -p /data/web_static/shared
+sudo apt update
+sudo apt install nginx -y
+sudo mkdir -p /data/web_static/releases/test
+sudo mkdir -p /data/web_static/shared
 echo "<html>
   <head>
   </head>
@@ -14,12 +14,12 @@ echo "<html>
 
 ln -sf /data/web_static/releases/test/ /data/web_static/current
 
-chown -R ubuntu:ubuntu /data/
+sudo chown -R ubuntu:ubuntu /data/
 
 echo "server {
     listen 80 default_server;
     listen [::]:80 default_server;
-    add_header X-Served-By $HOSTNAME;
+    add_header X-Served-By '$HOSTNAME';
     root /var/www/html;
     index index.html index.htm;
 
