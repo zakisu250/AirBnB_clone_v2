@@ -1,4 +1,4 @@
-#!usr/bin/python
+#!usr/bin/python3
 """ Transfer and execute archives to servers """
 import os.path
 from fabric.api import *
