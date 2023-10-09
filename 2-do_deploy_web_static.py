@@ -4,6 +4,7 @@ import os.path
 from fabric.api import *
 from fabric.operations import run, put, sudo
 
+env.user = 'ubuntu'
 env.hosts = ['54.174.136.120', '34.207.188.128']
 
 
