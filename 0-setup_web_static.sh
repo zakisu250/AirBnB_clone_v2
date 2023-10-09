@@ -2,8 +2,8 @@
 # script that sets up web servers for the deployment of web_static
 sudo apt-get update
 sudo apt-get install nginx -y
-mkdir -p /data/web_static/releases/test/
-mkdir -p /data/web_static/shared/
+mkdir -p /data/web_static/releases/test
+mkdir -p /data/web_static/shared
 echo "<html>
   <head>
   </head>
@@ -11,6 +11,7 @@ echo "<html>
     Holberton School
   </body>
 </html>" > /data/web_static/releases/test/index.html
+
 ln -sf /data/web_static/releases/test/ /data/web_static/current
 
 chown -R ubuntu:ubuntu /data/
