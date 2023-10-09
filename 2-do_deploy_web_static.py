@@ -10,13 +10,11 @@
 from fabric.api import *
 from os.path import exists
 
-env.user = 'ubuntu'
 env.hosts = ['54.174.136.120', '34.207.188.128']
 
 
 def do_deploy(archive_path):
-    """ distributes an archive to my web servers
-    """
+    """ distributes an archive to my web servers """
     if exists(archive_path) is False:
         return False
     filename = archive_path.split('/')[-1]
