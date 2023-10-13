@@ -15,34 +15,22 @@ env.hosts = ['54.174.136.120', '34.207.188.128']
 
 def do_deploy(archive_path):
     """ distributes an archive to my web servers """
-    if os.path.isfile(archive_path) is False:
+    if exists(archive_path) is False:
         return False
-    filename = archive_path.split("/")[-1]
-    name = file.split(".")[0]
+    filename = archive_path.split('/')[-1]
+    no_tgz = '/data/web_static/releases/' + "{}".format(filename.split('.')[0])
+    tmp = "/tmp/" + filename
 
-    if put(archive_path, "/tmp/{}".format(filename)).failed is True:
+    try:
+        put(archive_path, "/tmp/")
+        run("mkdir -p {}/".format(no_tgz))
+        run("tar -xzf {} -C {}/".format(tmp, no_tgz))
+        run("rm {}".format(tmp))
+        run("mv {}/web_static/* {}/".format(no_tgz, no_tgz))
+        run("rm -rf {}/web_static".format(no_tgz))
+        run("rm -rf /data/web_static/current")
+        run("ln -s {}/ /data/web_static/current".format(no_tgz))
+        print("New version deployed!")        
+        return True
+    except:
         return False
-    if run("rm -rf /data/web_static/releases/{}/".
-           format(name)).failed is True:
-        return False
-    if run("mkdir -p /data/web_static/releases/{}/".
-           format(name)).failed is True:
-        return False
-    if run("tar -xzf /tmp/{} -C /data/web_static/releases/{}/".
-           format(filename, name)).failed is True:
-        return False
-    if run("rm /tmp/{}".format(filename)).failed is True:
-        return False
-    if run("mv /data/web_static/releases/{}/web_static/* "
-           "/data/web_static/releases/{}/".format(name, name)).failed is True:
-        return False
-    if run("rm -rf /data/web_static/releases/{}/web_static".
-           format(name)).failed is True:
-        return False
-    if run("rm -rf /data/web_static/current").failed is True:
-        return False
-    if run("ln -s /data/web_static/releases/{}/ /data/web_static/current".
-           format(name)).failed is True:
-        return False
-    print("New version deployed!")
-    return True
