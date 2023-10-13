@@ -17,10 +17,10 @@ def do_deploy(archive_path):
     """ distributes an archive to my web servers """
     if os.path.isfile(archive_path) is False:
         return False
-    file = archive_path.split("/")[-1]
+    filename = archive_path.split("/")[-1]
     name = file.split(".")[0]
 
-    if put(archive_path, "/tmp/{}".format(file)).failed is True:
+    if put(archive_path, "/tmp/{}".format(filename)).failed is True:
         return False
     if run("rm -rf /data/web_static/releases/{}/".
            format(name)).failed is True:
@@ -29,9 +29,9 @@ def do_deploy(archive_path):
            format(name)).failed is True:
         return False
     if run("tar -xzf /tmp/{} -C /data/web_static/releases/{}/".
-           format(file, name)).failed is True:
+           format(filename, name)).failed is True:
         return False
-    if run("rm /tmp/{}".format(file)).failed is True:
+    if run("rm /tmp/{}".format(filename)).failed is True:
         return False
     if run("mv /data/web_static/releases/{}/web_static/* "
            "/data/web_static/releases/{}/".format(name, name)).failed is True:
