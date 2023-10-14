@@ -5,7 +5,7 @@ from fabric.api import env, put, run, local
 from os.path import exists
 import time
 
-env.hosts = ['54.174.136.120', '34.207.188.128']
+env.hosts = ['107.23.211.94', '35.175.105.178']
 
 def do_pack():
     """ Packing the directory to create .tgz file """
