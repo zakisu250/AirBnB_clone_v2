@@ -7,10 +7,10 @@
     - remove temporary directories and sub-directories
 """
 
-from fabric.api import *
+from fabric.api import put, run, env
 from os.path import exists
 
-env.hosts = ['54.174.136.120', '34.207.188.128']
+env.hosts = ['107.23.211.94', '35.175.105.178']
 
 
 def do_deploy(archive_path):
