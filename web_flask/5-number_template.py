@@ -3,7 +3,7 @@
 This script starts a server at 0.0.0.0 on port 5000
 also accept character from the url
 """
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -39,7 +39,7 @@ def intnumber(n):
     return "{:d} is a number".format(n)
 
 
-@app.route('number_template/<int:n>', strict_slashes=False)
+@app.route('/number_template/<int:n>', strict_slashes=False)
 def numbersandtemplate(n):
     """ Display html element if n in a number """
     return render_template('5-number.html', n=n)
