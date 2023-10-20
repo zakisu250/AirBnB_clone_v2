@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-New engine DBStorage"""
+New engine DBStorage
+"""
 import os
 from models.base_model import BaseModel, Base
 from models.user import User
