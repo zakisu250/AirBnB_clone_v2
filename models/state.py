@@ -7,18 +7,22 @@ from models.city import City
 import models
 from os import getenv
 
+
 class State(BaseModel, Base):
-    """ State class """
+    """ State class initialization """
     __tablename__ = 'states'
     name = Column(String(128), nullable=False)
-    cities = relationship("City", cascade="delete", backref="state")
+    cities = relationship("City", backref="state")
 
+    def __init__(self, *args, **kwargs):
+        """ Initialize the states class """
+        super().__init__(*args, **kwargs)
 
     @property
     def cities(self):
         """get list of city"""
         city_ls = []
-        for i in models.storage.all(City).values():
-            if i.state_id == self.id:
-                city_ls.append(City)
+        for city in models.storage.all(City).values():
+            if city.state_id == self.id:
+                city_ls.append(city)
         return city_ls
