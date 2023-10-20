@@ -15,7 +15,8 @@ def states_list():
     states = storage.all("State")
     dict_repr = {value.id: value.name for value in states.values()}
     return render_template('7-states_list.html',
-                            Table="States", states=dict_repr)
+                           Table="States", states=dict_repr)
+
 
 @app.teardown_appcontext
 def teardown_db(exception):
