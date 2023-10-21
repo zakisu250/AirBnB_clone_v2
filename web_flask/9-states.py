@@ -20,10 +20,10 @@ def states():
 @app.route('/states/<id>', strict_slashes=False)
 def states_with_id(id):
     """ Display a detail on a selected state """
-    all_states = storage.all("State")
+    all_states = storage.all(State).values()
     try:
         state_ids = all_states[id]
-        return render_template('9-states.html', state_id=state_ids
+        return render_template('9-states.html', state_id=state_ids,
                                condition="state_id")
     except Exception:
         return render_template("9-states.html", condition="not_found")
