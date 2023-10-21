@@ -4,8 +4,7 @@ Displays a states list
 """
 from flask import Flask, render_template
 from models import storage
-import sys
-sys.path.append('../')
+from models.state import State
 
 app = Flask(__name__)
 
@@ -13,12 +12,12 @@ app = Flask(__name__)
 @app.route('/states_list', strict_slashes=False)
 def states_list():
     """ Display the templates of states in ascending order """
-    states = storage.all("State")
-    return render_template('7-states_list.html', states=states)
+    states = storage.all(State).values()
+    return render_template('7-states_list.html', Table="State", states=states)
 
 
 @app.teardown_appcontext
-def teardown_db(exception):
+def teardown_db(self):
     """ Close the session on teardown """
     storage.close()
 
