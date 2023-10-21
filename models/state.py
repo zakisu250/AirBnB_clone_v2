@@ -10,19 +10,19 @@ from os import getenv
 
 class State(BaseModel, Base):
     """ State class initialization """
-    __tablename__ = 'states'
-    name = Column(String(128), nullable=False)
-    cities = relationship("City", backref="state")
+    if getenv("HBNB_TYPE_STORAGE") == 'db':
+        __tablename__ = 'states'
+        name = Column(String(128), nullable=False)
+        cities = relationship("City", cascade="delete", backref="state")
 
-    def __init__(self, *args, **kwargs):
-        """ Initialize the states class """
-        super().__init__(*args, **kwargs)
+    else:
+        name = ""
 
-    @property
-    def cities(self):
-        """get list of city"""
-        city_ls = []
-        for city in models.storage.all(City).values():
-            if city.state_id == self.id:
-                city_ls.append(city)
-        return city_ls
+        @property
+        def cities(self):
+            """get list of city"""
+            city_ls = []
+            for city in models.storage.all(City).values():
+                if city.state_id == self.id:
+                    city_ls.append(city)
+            return city_ls

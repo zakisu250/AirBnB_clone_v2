@@ -63,7 +63,7 @@ class DBStorage():
     def reload(self):
         """
         drop and recreate all tables in the database"""
-        self.__session = Base.metadata.create_all(bind=self.__engine)
+        Base.metadata.create_all(bind=self.__engine)
         new_session = scoped_session(sessionmaker(expire_on_commit=False,
                                      bind=self.__engine))
         self.__session = new_session

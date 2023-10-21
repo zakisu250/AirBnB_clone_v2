@@ -3,15 +3,17 @@
 Displays a states list
 """
 from flask import Flask, render_template
-from models import *
 from models import storage
+import sys
+sys.path.append('../')
+
 app = Flask(__name__)
 
 
 @app.route('/states_list', strict_slashes=False)
 def states_list():
     """ Display the templates of states in ascending order """
-    states = storage.all("State").values()
+    states = storage.all("State")
     return render_template('7-states_list.html', states=states)
 
 
