@@ -13,7 +13,7 @@ app = Flask(__name__)
 def states_list():
     """ Display the templates of states in ascending order """
     states = storage.all(State).values()
-    return render_template('7-states_list.html', Table="State", states=states)
+    return render_template('7-states_list.html', Table="States", states=states)
 
 
 @app.teardown_appcontext
