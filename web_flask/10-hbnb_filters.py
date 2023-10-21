@@ -23,9 +23,9 @@ def filters_list():
         method to display html page 6-index.html
     """
     states = storage.all(State).values()
-    amenities = storage.all(Amenity)
+    amens = storage.all(Amenity).values()
     return render_template("10-hbnb_filters.html",
-                           states=states, amenities=amenities)
+                           states=states, amenities=amens)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

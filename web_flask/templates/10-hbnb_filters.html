@@ -4,7 +4,7 @@
     	<TITLE>HBNB</TITLE>
 	<meta name="viewport" content="width=device-width">
 	<meta charset='utf-8'>
-	<link rel='shortcut icon' href="images/icon.icon">
+	<link rel='shortcut icon' href="../static/images/icon.png">
 	<link rel="stylesheet" href="../static/styles/4-common.css">
 	<link rel="stylesheet" href="../static/styles/3-header.css">
 	<link rel="stylesheet" href="../static/styles/3-footer.css">
@@ -21,24 +21,24 @@
 				<H4>&nbsp;</H4>
 				<UL class="popover">
 				    {% for state in states|sort(attribute="name") %}
-				    <LI>
+				        <LI>
 					    <H2>{{ state.name }}</H2>
 					    <UL>
 						    {% for city in state.cities|sort(attribute="name") %}
 						    <LI>{{ city.name }}</LI>
 						    {% endfor %}
 					    </UL>
-			            </LI>
+			                </LI>
 				    {% endfor %}
 				</UL>
 			</DIV>
-			<DIV class="amenities">
+			<DIV class="filter_amenities">
 				<H3>Amenities</H3>
 				<H4>&nbsp;</H4>
 				<UL class="popover">
-				{% for amenity in amenities|sort(attribute="name") %}
-				    <LI>{{ amenities.name }}</LI>
-				{% endfor %}
+				    {% for amen in amenities|sort(attribute="name") %}
+				        <LI>{{ amen.name }}</LI>
+				    {% endfor %}
 				</UL>
 			</DIV>
 			<BUTTON>Search</BUTTON>
