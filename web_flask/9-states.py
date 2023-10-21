@@ -25,7 +25,7 @@ def state_detail(id):
         state_ids = state_all[id]
         return render_template('9-states.html', state_id=state_id
                                condition="state_id")
-    except:
+    except Exception:
         return render_template("9-states.html", condition="not_found")
 
 
