@@ -6,7 +6,6 @@
 	border: 1px solid #DDDDDD;
 	border-radius: 4px;
 }
-
 .locations {
 	display: inline;
 	vertical-align: middle;
@@ -16,7 +15,6 @@
 	line-height: 20px;
 	border-right: 1px solid #DDDDDD;
 }
-
 .filter_amenities {
 	display: inline;
 	vertical-align: middle;
@@ -25,7 +23,6 @@
     	width: 25%;
 	line-height: 20px;
 }
-
 .popover {
 	list-style-type: none;
 	display: none;
@@ -46,37 +43,30 @@
 .amens li {
 	margin-left: 40px;
 }
-
 .locations:hover .popover {
 	display: inline-block;
 }
-
 .filter_amenities:hover .popover {
 	display: inline-block;
 }
-
 ul {
 	list-style-type: none;
 	padding: 0px;
 	padding-bottom: 20px;
 }
-
 li {
 }	
-
 h2 {
 	font-size: 16px;
 	padding-left: 30px;
 	margin: 0px;
 }
-
 h3 {
 	font-weight: 600;
 	margin-top: 12px;
 	margin-bottom: 5px;	
 	padding-left: 45px;
 }
-
 h4 {
 	font-size: 14px;
 	font-weight: 400;
@@ -84,7 +74,6 @@ h4 {
 	margin-bottom: 5px;
 	padding-left: 45px;
 }
-
 button {
 	color: #FFFFFF;
 	font-size: 18px;
