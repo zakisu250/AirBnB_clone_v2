@@ -39,6 +39,13 @@
 	overflow: scroll;
 	height: 300px;
 }
+.popover ul {
+	margin: 20px;
+	margin-left: 40px;
+}
+.amens li {
+	margin-left: 40px;
+}
 
 .locations:hover .popover {
 	display: inline-block;
